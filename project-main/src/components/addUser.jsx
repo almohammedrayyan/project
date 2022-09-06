@@ -8,16 +8,18 @@ const AddUserForm = (props) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!user.name || !user.username) return;
 
-    props.addUser(user);
-    setUser(initialFormState);
-  };
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (!user.name || !user.username) return;
+
+          props.addUser(user);
+          setUser(initialFormState);
+        }}
+      >
         <label>Name</label>
         <input
           type="text"
